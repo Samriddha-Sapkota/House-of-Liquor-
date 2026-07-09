@@ -112,7 +112,7 @@ Full advantages/disadvantages tables for each control (firewall, hashing, saniti
 This app is intentionally vulnerable — run **locally only**.
 
 ```bash
-git clone https://github.com/samriddha-sapkota/House-of-Liquor.git
+gh repo clone Samriddha-Sapkota/House-of-Liquor-
 cd house-of-liquor
 pip install -r requirements.txt
 python app.py
