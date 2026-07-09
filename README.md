@@ -5,6 +5,8 @@ A deliberately vulnerable Flask web application built on Jinja2 to demonstrate S
 
 ---
 
+# This readme only contains the surface of the documentation. To read the full documentation please refer to [Documentation.pdf](./Documentation.pdf).
+
 ## Overview 
 
 House of Liquor is a mock e-commerce liquor store that walks through the full lifecycle of an attack: reconnaissance, vulnerability discovery, exploitation, and remediation. The vulnerable route (`/review`) strings unsanitized input into a Jinja2 template string, and a separate search/login flow is vulnerable to SQL injection via unparameterized queries.
