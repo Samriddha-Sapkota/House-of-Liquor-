@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - House of Liquor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+    <header class="nav">
+        <div class="nav-inner">
+            <a href="/dashboard" class="back-link">← Dashboard</a>
+            <a href="/" class="nav-logo-link">
+                <img src="/static/logo.png" class="nav-logo" alt="House of Liquor logo">
+            </a>
+            <div class="nav-links">
+                <a href="/shop">Collection</a>
+                <a href="/cart">Cart</a>
+                {% if show_logout %}
+                <a href="/logout">Log Out</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="page-card">
+            <p class="eyebrow">Admin Tools</p>
+            <h1>Manage Wines</h1>
+            <p class="lead">Add a new wine or remove an existing one from the collection.</p>
+
+            {% if admin_message %}
+            <p class="helper-text">{{ admin_message }}</p>
+            {% endif %}
+            {% if admin_error %}
+            <p class="form-error">{{ admin_error }}</p>
+            {% endif %}
+
+            <form method="post" class="admin-form">
+                <input type="hidden" name="action" value="add">
+                <input name="name" placeholder="Wine name">
+                <button type="submit">Add Wine</button>
+            </form>
+        </section>
+
+        <section class="page-card">
+            <h2>Current Wines</h2>
+            <div class="admin-list">
+                {% for product in products %}
+                    <form method="post" class="admin-row">
+                        <input type="hidden" name="action" value="remove">
+                        <input type="hidden" name="product_id" value="{{ product[0] }}">
+                        <span>{{ product[1] }}</span>
+                        <button type="submit">Remove</button>
+                    </form>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="page-card">
+            <h2>Manage Members</h2>
+            <p class="lead">Create new member accounts that persist in the database.</p>
+            <form method="post" class="admin-form">
+                <input type="hidden" name="action" value="add_member">
+                <input name="username" placeholder="New username" autocomplete="username">
+                <input name="password" type="password" placeholder="New password" autocomplete="new-password">
+                <button type="submit">Add Member</button>
+            </form>
+
+            <div class="admin-list" style="margin-top: 16px;">
+                {% for member in users %}
+                    <div class="admin-row">
+                        <span>{{ member[1] }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>House of Liquor</h3>
+                <p>Curated premium spirits for the discerning palate.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Collection</a></li>
+                    <li><a href="{{ member_url }}">{{ member_label }}</a></li>
+                    {% if show_logout %}
+                    <li><a href="/logout">Log Out</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 House of Liquor. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

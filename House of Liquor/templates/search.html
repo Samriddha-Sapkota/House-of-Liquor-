@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - House of Liquor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="search-page">
+    <header class="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <a href="/dashboard" class="back-link">← Dashboard</a>
+            </div>
+            <img src="/static/logo.png" class="nav-logo" alt="House of Liquor logo">
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="page-card">
+            <p class="eyebrow">Bottle Search</p>
+            <h1>Search the collection</h1>
+            <form method="get" action="/search" class="search-form">
+                <input name="q" value="{{ query }}" placeholder="Search by bottle name">
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section class="results-grid">
+            {% if results %}
+                {% for item in results %}
+                    <a href="/product/{{ item[0] }}" class="result-card">
+                        <h2>{{ item[1] }}</h2>
+                        <p>View the reserve bottle details.</p>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <h2>No bottles found</h2>
+                    <p>Try a different keyword or browse the shop.</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>House of Liquor</h3>
+                <p>Curated premium spirits for the discerning palate.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Collection</a></li>
+                    <li><a href="{{ member_url }}">{{ member_label }}</a></li>
+                    {% if show_logout %}
+                    <li><a href="/logout">Log Out</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 House of Liquor. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

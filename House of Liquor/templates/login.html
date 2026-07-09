@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - House of Liquor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="login-page">
+    <header class="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <a href="/" class="back-link">← Home</a>
+            </div>
+            <img src="/static/logo.png" class="nav-logo" alt="House of Liquor logo">
+        </div>
+    </header>
+
+    <main class="login-hero">
+        <section class="page-card auth-card">
+            <img src="/static/logo.png" class="login-logo" alt="House of Liquor logo">
+            <h1>Member Access</h1>
+                <p class="lead">Sign in to access your account dashboard.</p>
+            <form method="POST" class="login-form">
+                <input name="username" placeholder="Username" autocomplete="username">
+                <input name="password" type="password" placeholder="Password" autocomplete="current-password">
+                <button type="submit">Enter</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>House of Liquor</h3>
+                <p>Curated premium spirits for the discerning palate.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Collection</a></li>
+                    <li><a href="{{ member_url }}">{{ member_label }}</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 House of Liquor. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

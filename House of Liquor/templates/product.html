@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Collection - House of Liquor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="product-page">
+    <header class="nav">
+        <div class="nav-inner">
+            <a href="/" class="back-link">← Home</a>
+            <a href="/" class="nav-logo-link">
+                <img src="/static/logo.png" class="nav-logo" alt="House of Liquor logo">
+            </a>
+            <div class="nav-links">
+                <a href="/shop">Collection</a>
+                <a href="{{ member_url }}">{{ member_label }}</a>
+                {% if show_logout %}
+                <a href="/logout">Log Out</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="product-hero">
+            <div class="product-bottle" aria-hidden="true">
+                <img src="/static/bottle.png" alt="{{ product[1] }} bottle" class="bottle-image">
+            </div>
+            <div class="product-info">
+                <p class="eyebrow">Reserve Selection</p>
+                <h1>{{ product[1] }}</h1>
+                <p class="subtitle">A premium bottle in the House of Liquor collection.</p>
+                <div class="action-row">
+                    <form action="/cart/add/{{ product[0] }}" method="post" class="inline-form">
+                        <button type="submit" class="button-link">Add to Cart</button>
+                    </form>
+                    <a href="#reviews" class="button-link">Leave Review</a>
+                    <a href="/shop" class="button-link button-link-secondary">Back to Collection</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-story">
+            <h2>Signature Notes</h2>
+            <p>This is a curated detail page for {{ product[1] }}. It keeps the project’s premium presentation while restoring the expected View Details flow.</p>
+        </section>
+
+        <section class="product-details">
+            <div>
+                <h3>Craft</h3>
+                <p>Selected for the collection with a focus on depth and finish.</p>
+            </div>
+            <div>
+                <h3>Style</h3>
+                <p>Presented in the same premium visual language as the rest of the site.</p>
+            </div>
+            <div>
+                <h3>Access</h3>
+                <p>Use the review form to submit a new note for this bottle.</p>
+            </div>
+        </section>
+
+        <section class="product-reviews" id="reviews">
+            <h2>Reviews</h2>
+            {% if review_error %}
+                <p class="form-error">{{ review_error }}</p>
+            {% endif %}
+
+            <form method="post" action="/review" class="review-form review-inline-form">
+                <input type="hidden" name="product_id" value="{{ product[0] }}">
+                <input name="name" placeholder="Your name" autocomplete="name">
+                <textarea name="message" rows="5" placeholder="Write your review"></textarea>
+                <button type="submit">Submit review</button>
+            </form>
+
+            <div class="review-list">
+                {% if reviews %}
+                    {% for review in reviews %}
+                        <article class="review-card">
+                            <div class="review-meta">
+                                <strong>{{ review[0] }}</strong>
+                                <span>{{ review[2] }}</span>
+                            </div>
+                            <p>{{ review[1] }}</p>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <p class="empty-note">No reviews yet. Be the first to leave one.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="product-final">
+            <h2>Explore the full collection</h2>
+            <a href="/shop">Return to Collection</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>House of Liquor</h3>
+                <p>Curated premium spirits for the discerning palate.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Collection</a></li>
+                    <li><a href="{{ member_url }}">{{ member_label }}</a></li>
+                    {% if show_logout %}
+                    <li><a href="/logout">Log Out</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 House of Liquor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    const bottle = document.querySelector('.bottle-image');
+    if (bottle) {
+        bottle.style.filter = 'hue-rotate(30deg) saturate(1.2)';
+    }
+    </script>
+</body>
+</html>

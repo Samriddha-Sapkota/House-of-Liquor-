@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - House of Liquor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <header class="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <a href="/" class="back-link">← Home</a>
+            </div>
+            <img src="/static/logo.png" class="nav-logo" alt="House of Liquor logo">
+        </div>
+    </header>
+
+    <main class="page-shell dashboard-shell">
+        <section class="page-card hero-card">
+            <p class="eyebrow">Member Area</p>
+            <h1>Welcome back, {{ user }}</h1>
+            <p class="lead">
+                Your reserve profile is active. Browse the collection, search for bottles, review items, or manage your cart.
+            </p>
+            <div class="action-row">
+                <a href="/shop" class="button-link">Browse Collection</a>
+                <a href="/search?q=" class="button-link button-link-secondary">Search Bottles</a>
+                <a href="/review" class="button-link button-link-secondary">Write a Review</a>
+                <a href="/cart" class="button-link button-link-secondary">View Cart</a>
+                <a href="/logout" class="button-link button-link-secondary">Log Out</a>
+                {% if is_admin %}
+                <a href="/admin" class="button-link button-link-secondary">Manage Wine</a>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="info-card">
+                <h2>Account Status</h2>
+                <p>Authenticated and ready to enter the collection.</p>
+            </article>
+            <article class="info-card">
+                <h2>Cart Overview</h2>
+                {% if cart %}
+                    <ul class="summary-list">
+                        {% for product in cart %}
+                            <li>{{ product[1] }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Your cart is empty right now.</p>
+                {% endif %}
+            </article>
+            <article class="info-card">
+                <h2>Member Tools</h2>
+                <p>Use the shop to add bottles to cart and open a bottle page to see and leave reviews.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>House of Liquor</h3>
+                <p>Curated premium spirits for the discerning palate.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Collection</a></li>
+                    <li><a href="{{ member_url }}">{{ member_label }}</a></li>
+                    {% if show_logout %}
+                    <li><a href="/logout">Log Out</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 House of Liquor. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
